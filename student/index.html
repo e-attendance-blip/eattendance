@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8d7da;
+            display: flex;
+            height: 100vh;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: 250px;
+            background-color: #fce4ec;
+            padding: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            transition: transform 0.3s ease;
+            overflow-y: auto;
+            transform: translateX(0);
+            z-index: 1;
+        }
+
+        .sidebar.hidden {
+            transform: translateX(-250px);
+        }
+
+        .sidebar .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .sidebar .menu-item:hover {
+            background-color: #f8bbd0;
+        }
+
+        .sidebar .menu-item i {
+            margin-right: 10px;
+            color: #e91e63;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+            width: 100%;
+        }
+
+        .header {
+            background-color: #e91e63;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+            font-size: 24px;
+        }
+
+        /* Profile Section */
+        .profile {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 40px 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+            min-height: 350px;
+        }
+
+        .profile img {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            margin-right: 20px;
+        }
+
+        .profile .details {
+            flex: 1;
+        }
+
+        .profile .details h2 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: #e91e63;
+        }
+
+        .profile .details .data {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .profile .details .data div {
+            font-size: 18px;
+            color: #333;
+        }
+
+        /* Burger Icon */
+        .burger {
+            font-size: 24px;
+            cursor: pointer;
+            color: #e91e63;
+            position: fixed;
+            top: 20px;
+            left: 260px; /* Positioned right next to the sidebar */
+            z-index: 2;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Burger Icon for Toggling Sidebar -->
+    <div class="burger" onclick="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <a href="#" class="menu-item">
+            <i class="fas fa-user-circle"></i>
+            <span>Profile</span>
+        </a>
+        <a href="sidebar_3.html" class="menu-item">
+            <i class="fas fa-user"></i>
+            <span>Upload Proof</span>
+        </a>
+        <a href="sidebar_4.html" class="menu-item">
+            <i class="fas fa-clipboard"></i>
+            <span>Persentase Saya</span>
+        </a>
+        <a href="sidebar_5.html" class="menu-item">
+            <i class="fas fa-cogs"></i>
+            <span>Pengaturan</span>
+        </a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="header">Student - Profile</div>
+
+        <!-- Student Profile -->
+        <div class="profile">
+            <div class="image">
+                <img src="../assets/student.jpeg" alt="Profile Picture">
+            </div>
+            <div class="details">
+                <h2>Lee Jeno</h2>
+                <div class="data">
+                    <div><strong>Nomor :</strong> 2021000002</div>
+                    <div><strong>Religion :</strong> Islamic</div>
+                    <div><strong>Phone Number:</strong> 085876543210</div>
+                    <div><strong>Status :</strong> Student</div>
+                    <div><strong>Gender :</strong> Male</div>
+                    <div><strong>Place, Date of Birth :</strong> Inchenon, 23 April 2000</div>
+                    <div><strong>National ID Number :</strong> 3602041211870001</div>
+                    <div><strong>Address :</strong> Seoul, Korea Selatan</div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            document.querySelector('.sidebar').classList.toggle('hidden');
+        }
+
+        // JavaScript function for going back to the previous page
+    </script>
+
+</body>
+</html>

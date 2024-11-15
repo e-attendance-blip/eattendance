@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Selection</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f8d7da;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #e91e63;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .options {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+
+        .option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border-radius: 5px;
+        }
+
+        .option.active {
+            background-color: #fce4ec;
+        }
+
+        .option i {
+            font-size: 24px;
+            color: #e91e63;
+            margin-bottom: 5px;
+            transition: color 0.3s ease;
+        }
+
+        .option.active i {
+            color: #c2185b;
+        }
+
+        .option p {
+            font-size: 16px;
+            color: #555;
+        }
+
+        .next-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+            display: none; /* Tombol-tombol ini disembunyikan terlebih dahulu */
+        }
+
+        .next-btn, .back-btn {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            text-align: center;
+            cursor: pointer;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .next-btn {
+            background-color: #e91e63;
+        }
+
+        .back-btn {
+            background-color: #ddd;
+            color: #333;
+            margin-top: 10px; /* Memberikan jarak antara tombol Next dan Back */
+            display: none; /* Tombol back disembunyikan sampai role dipilih */
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">SMK BINA PATRIOT</h1>
+        
+        <h2 class="subtitle">LOGIN SEBAGAI :</h2>
+        
+        <div class="options">
+            <div class="option" onclick="selectRole('admin')">
+                <i class="fas fa-user-shield"></i>
+                <p>Admin</p>
+            </div>
+            <div class="option" onclick="selectRole('teacher')">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <p>Teacher</p>
+            </div>
+            <div class="option" onclick="selectRole('student')">
+                <i class="fas fa-user-graduate"></i>
+                <p>Student</p>
+            </div>
+        </div>
+
+        <div class="next-buttons">
+            <a href="../admin/index.html" id="nextAdmin" class="next-btn">Next to Admin</a>
+            <a href="../teacher/index.html" id="nextTeacher" class="next-btn">Next to Teacher</a>
+            <a href="../student/index.html" id="nextStudent" class="next-btn">Next to Student</a>
+        </div>
+
+        <!-- Tombol Back yang akan selalu terlihat dan berada di bawah Next to -->
+        <a href="javascript:void(0);" class="back-btn" onclick="goBack()">Back</a>
+    </div>
+
+    <script>
+        function selectRole(role) {
+            // Reset all buttons to hidden and remove 'active' class from all options
+            document.querySelectorAll('.next-btn').forEach(btn => btn.style.display = 'none');
+            document.querySelectorAll('.option').forEach(option => option.classList.remove('active'));
+
+            // Show the selected role button and add 'active' class
+            document.getElementById(`next${role.charAt(0).toUpperCase() + role.slice(1)}`).style.display = 'block';
+            document.querySelector(`.option[onclick="selectRole('${role}')"]`).classList.add('active');
+
+            // Show the next buttons section
+            document.querySelector('.next-buttons').style.display = 'flex';
+
+            // Show the "Back" button
+            document.querySelector('.back-btn').style.display = 'block';
+        }
+
+        function goBack() {
+            // Fungsi untuk kembali ke halaman login sebelumnya
+            window.history.back();
+        }
+    </script>
+</body>
+</html>

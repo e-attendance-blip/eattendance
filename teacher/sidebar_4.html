@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8d7da;
+            display: flex;
+            height: 100vh;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #fce4ec;
+            padding: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            transition: transform 0.3s ease;
+            overflow-y: auto;
+            transform: translateX(0);
+            z-index: 1;
+        }
+
+        .sidebar.hidden {
+            transform: translateX(-250px);
+        }
+
+        .sidebar .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .sidebar .menu-item:hover {
+            background-color: #f8bbd0;
+        }
+
+        .sidebar .menu-item i {
+            margin-right: 10px;
+            color: #e91e63;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+            width: 100%;
+        }
+
+        .header {
+            background-color: #e91e63;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+            font-size: 24px;
+        }
+
+        /* Table Styles */
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #fce4ec;
+            color: #e91e63;
+        }
+
+        td {
+            background-color: #f9f9f9;
+        }
+
+        td img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        .dropdown {
+            margin: 10px;
+        }
+
+        select {
+            padding: 5px;
+            font-size: 14px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .button-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .btn {
+            background-color: #e91e63;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #c2185b;
+        }
+
+        /* Pie chart container */
+        .chart-container {
+            width: 200px;
+            margin: 20px auto;
+        }
+
+        /* Ratio Section */
+        .ratio {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .ratio div {
+            margin-right: 15px;
+            text-align: center;
+        }
+
+        .icon {
+            font-size: 20px;
+        }
+
+        .burger {
+            font-size: 24px;
+            cursor: pointer;
+            color: #e91e63;
+            position: fixed;
+            top: 20px;
+            left: 260px;
+            z-index: 2;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="burger" onclick="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+    </div>
+
+    <div class="sidebar">
+        <a href="index.html" class="menu-item">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+        </a>
+        <a href="sidebar_2.html" class="menu-item">
+            <i class="fas fa-users"></i>
+            <span>Data Student</span>
+        </a>
+        <a href="sidebar_3.html" class="menu-item">
+            <i class="fas fa-calendar"></i>
+            <span>Data Absen</span>
+        </a>
+        <a href="#" class="menu-item">
+            <i class="fas fa-clipboard"></i>
+            <span>Data Persentase Siswa</span>
+        </a>
+        <a href="sidebar_5.html" class="menu-item">
+            <i class="fas fa-cogs"></i>
+            <span>Pengaturan</span>
+        </a>
+    </div>
+
+    <div class="main-content">
+        <div class="header">Teacher - Student Data</div>
+
+
+        <!-- Dropdowns -->
+        <div>
+            <select class="dropdown" id="timeRange">
+                <option value="daily">Time Range</option>
+                <option value="daily">Daily</option>
+                <option value="weekly">Weekly</option>
+                <option value="monthly">Monthly</option>
+            </select>
+
+            <select class="dropdown" id="classDropdown">
+                <option value="XAP">Class</option>
+                <option value="XAP">X AP A</option>
+                <option value="XAPB">X AP B</option>
+                <option value="XAPC">X AP C</option>
+                <option value="XIAPA">XI AP A</option>
+                <option value="XIAPB">XI AP B</option>
+                <option value="XIAPC">XI AP C</option>
+                <option value="XIIAPA">XII AP A</option>
+                <option value="XIIAPB">XII AP B</option>
+                <option value="XIIAPC">XII APC</option>
+            </select>
+
+            <select class="dropdown" id="typeDropdown">
+                <option value="present">Type</option>
+                <option value="present">Present</option>
+                <option value="absent">Absent</option>
+                <option value="sick">Sick</option>
+                <option value="all">All</option>
+            </select>
+        </div>
+        <!-- Student Data Table -->
+        <table>
+            <thead>
+                <tr>
+                    <th>NAMA</th>
+                    <th>Class</th>
+                    <th>PRESENT</th>
+                    <th>ABSENT</th>
+                    <th>SICK</th>
+                    <th>PRESENTASE</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Intan Fandini</td>
+                    <td>XAPC</td>
+                    <td>5</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>100%</td>
+                </tr>
+                <tr>
+                    <td>Maura Nasyifa</td>
+                    <td>XAPC</td>
+                    <td>4</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>80%</td>
+                </tr>
+                <tr>
+                    <td>Kamila Maulida</td>
+                    <td>XAPC</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>20%</td>
+                </tr>
+                <tr>
+                    <td>Mouzza</td>
+                    <td>XAPC</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>5</td>
+                    <td>0%</td>
+                </tr>
+                <tr>
+                    <td>Adinda Salsa</td>
+                    <td>XAPC</td>
+                    <td>0</td>
+                    <td>5</td>
+                    <td>0</td>
+                    <td>0%</td>
+                </tr>
+                <tr>
+                    <td>Angelina</td>
+                    <td>XAPC</td>
+                    <td>5</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>100%</td>
+                </tr>
+                <tr>
+                    <td>Malika</td>
+                    <td>XAPC</td>
+                    <td>4</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>80%</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Pie Chart -->
+        <div class="chart-container">
+            <canvas id="attendanceChart"></canvas>
+        </div>
+
+        <!-- Ratio and Action Buttons -->
+        <div class="ratio">
+            <div>
+                <i class="fas fa-circle" style="color: purple;"></i> Present
+            </div>
+            <div>
+                <i class="fas fa-circle" style="color: lightblue;"></i> Absent
+            </div>
+            <div>
+                <i class="fas fa-circle" style="color: green;"></i> Sick
+            </div>
+        </div>
+
+        <div class="button-container">
+            <button class="btn" onclick="downloadFile()">Download <i class="fas fa-download"></i></button>
+            <button class="btn" onclick="shareWith()">Share <i class="fas fa-share-alt"></i></button>
+        </div>
+    </div>
+
+    <script>
+        // Sidebar toggle function
+        function toggleSidebar() {
+            document.querySelector('.sidebar').classList.toggle('hidden');
+        }
+
+        // Initialize the pie chart
+        var ctx = document.getElementById('attendanceChart').getContext('2d');
+        var attendanceChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Present', 'Absent', 'Sick'],
+                datasets: [{
+                    data: [70, 20, 10],
+                    backgroundColor: ['#8e44ad', '#3498db', '#2ecc71'],
+                    hoverOffset: 4
+                }]
+            }
+        });
+
+        // Function to download data
+        function downloadFile() {
+            alert('Downloading file...');
+        }
+
+        // Function to share data
+        function shareWith() {
+            alert('Sharing data...');
+        }
+    </script>
+</body>
+</html>

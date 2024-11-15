@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8d7da;
+            display: flex;
+            height: 100vh;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: 250px;
+            background-color: #fce4ec;
+            padding: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            transition: transform 0.3s ease;
+            overflow-y: auto;
+            transform: translateX(0);
+            z-index: 1;
+        }
+
+        .sidebar.hidden {
+            transform: translateX(-250px);
+        }
+
+        .sidebar .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .sidebar .menu-item:hover {
+            background-color: #f8bbd0;
+        }
+
+        .sidebar .menu-item i {
+            margin-right: 10px;
+            color: #e91e63;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+            width: 100%;
+        }
+
+        .header {
+            background-color: #e91e63;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+            font-size: 24px;
+        }
+
+        /* Table Styles */
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #fce4ec;
+            color: #e91e63;
+        }
+
+        td {
+            background-color: #f9f9f9;
+        }
+
+        /* Button Styles */
+        .button-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .btn {
+            background-color: #e91e63;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #c2185b;
+        }
+
+        /* Burger Icon */
+        .burger {
+            font-size: 24px;
+            cursor: pointer;
+            color: #e91e63;
+            position: fixed;
+            top: 20px;
+            left: 260px;
+            z-index: 2;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Burger Icon for Toggling Sidebar -->
+    <div class="burger" onclick="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <a href="index.html" class="menu-item">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+        </a>
+        <a href="#" class="menu-item">
+            <i class="fas fa-users"></i>
+            <span>Data Student</span>
+        </a>
+        <a href="sidebar_3.html" class="menu-item">
+            <i class="fas fa-calendar"></i>
+            <span>Data Absen</span>
+        </a>
+        <a href="sidebar_4.html" class="menu-item">
+            <i class="fas fa-clipboard"></i>
+            <span>Data Persentase Siswa</span>
+        </a>
+        <a href="sidebar_5.html" class="menu-item">
+            <i class="fas fa-cogs"></i>
+            <span>Pengaturan</span>
+        </a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="header">Teacher - Student Data</div>
+
+        <!-- Student Data Table -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Student ID</th>
+                    <th>Name</th>
+                    <th>Class</th>
+                    <th>Gender</th>
+                    <th>Date of Birth</th>
+                    <th>Parent Contact</th>
+                    <th>Address</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>5001</td>
+                    <td>Ahmad Pras</td>
+                    <td>X TKJ 2</td>
+                    <td>Male</td>
+                    <td>2008-05-12</td>
+                    <td>081252783659</td>
+                    <td>Jl. Merdeka No. 17</td>
+                </tr>
+                <tr>
+                    <td>5002</td>
+                    <td>Budi Santoso</td>
+                    <td>XII TKJ 1</td>
+                    <td>Male</td>
+                    <td>2007-09-24</td>
+                    <td>087850790879</td>
+                    <td>Jl. Sudirman No. 45</td>
+                </tr>
+                <tr>
+                    <td>5003</td>
+                    <td>Citra Permatasari</td>
+                    <td>X1 AP1</td>
+                    <td>Female</td>
+                    <td>2008-01-15</td>
+                    <td>081312007347</td>
+                    <td>Jl. Gatot Subroto No. 18</td>
+                </tr>
+                <tr>
+                    <td>5004</td>
+                    <td>Dina Anggraini</td>
+                    <td>XII AP 1</td>
+                    <td>Female</td>
+                    <td>2007-11-08</td>
+                    <td>085815786546</td>
+                    <td>Jl. Pahlawan No. 25</td>
+                </tr>
+                <tr>
+                    <td>5005</td>
+                    <td>Eka Saputra</td>
+                    <td>X1 TKJ 2</td>
+                    <td>Male</td>
+                    <td>2008-03-20</td>
+                    <td>081345798019</td>
+                    <td>Jl. Diponegoro No. 27</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Buttons for Add, Edit, Back -->
+        <div class="button-container">
+            <button class="btn" onclick="window.location.href='#'">Add</button>
+            <button class="btn" onclick="window.location.href='#'">Edit</button>
+            <button class="btn" onclick="goBack()">Back</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            document.querySelector('.sidebar').classList.toggle('hidden');
+        }
+
+        // JavaScript function for going back to the previous page
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+
+</body>
+</html>
